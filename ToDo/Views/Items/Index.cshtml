@@ -29,31 +29,40 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.List.ListName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Details)
-        </td>
-        <td>
-            <a href="@Url.Action("ToggleDone", new {id=item.ItemID})">
-                 @Html.DisplayFor(modeItem => item.IsDone)
-            </a>
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ItemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ItemID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.List.ListName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modeItem => item.IsDone)*@
+                <a href="@Url.Action("ToggleDone", new {id=item.ItemID})">
+                    @if (item.IsDone)
+                    {
+                        <span class="glyphicon glyphicon-check"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-unchecked"></span>
+                    }
+                </a>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ItemID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ItemID })
+            </td>
+        </tr>
+    }
 
 </table>
