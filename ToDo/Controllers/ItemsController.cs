@@ -15,9 +15,33 @@ namespace ToDo.Controllers
         private ToDoContext db = new ToDoContext();
 
         // GET: Items
-        public ActionResult Index()
+        public ActionResult Index(string search, string sort)
         {
             var items = db.Items.Include(i => i.List);
+
+
+            // Add search for listName
+            if (!String.IsNullOrEmpty(search))
+            {
+                items = from item in items
+                        where item.List.ListName.Contains(search)
+                        select item;
+            }
+
+            if (sort == "Descending")
+            {
+                items = from item in items
+                        orderby item.List.ListName descending
+                        select item;
+            }
+            else
+            {
+                items = from item in items
+                        orderby item.List.ListName descending
+                        select item;
+            }
+
+
             return View(items.ToList());
         }
 
@@ -89,7 +113,7 @@ namespace ToDo.Controllers
             {
                 return HttpNotFound();
             }
-           
+
             if (item.IsDone)
             {
                 item.IsDone = false;
