@@ -31,13 +31,13 @@ namespace ToDo.Controllers
             if (sort == "Descending")
             {
                 items = from item in items
-                        orderby item.List.ListName descending
+                        orderby item.Name descending
                         select item;
             }
             else
             {
                 items = from item in items
-                        orderby item.List.ListName descending
+                        orderby item.Name ascending
                         select item;
             }
 

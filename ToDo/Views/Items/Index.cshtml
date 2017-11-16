@@ -12,9 +12,10 @@
 <div>
     @using (Html.BeginForm("Index", "Items", FormMethod.Get))
     {
+        @Html.RadioButton("sort", "Descending", true)<span>Sort Descending</span>
+        @Html.RadioButton("sort", "Ascending", true)<span>Sort Ascending</span>
         @Html.TextBox("search");
-        <input type="submit" name="submit" value="Search" />
-        <p>Search for ListName</p>
+        <input type="submit" name="submit" value="Search" /><span><p>Search for ListName</p> </span>
     }
 </div>
 <table class="table">
